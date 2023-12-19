@@ -1,0 +1,21 @@
+@ESportLeaderBoardAPI_HostAddress = http://localhost:5001
+
+PUT {{ESportLeaderBoardAPI_HostAddress}}/Player/
+Content-Type: application/json
+
+
+[{
+  "name": "Player1",
+  "profilePicture": "string",
+  "tag": "string"
+}
+,{
+"name": "Player2",
+"profilePicture": "string",
+"tag": "string"}
+]
+
+###
+
+GET {{ESportLeaderBoardAPI_HostAddress}}/Player/
+Content-Type: application/json

@@ -1,0 +1,35 @@
+export interface IMember {
+  /*  snowflake: string;
+    picture: IProfilePicture;*/
+    player: {
+        name: string;
+        profilePicture: string;
+        tag: string;
+    };
+    score: number;
+}
+/*
+  "players": [
+    {
+      "player": {
+        "name": "string",
+        "profilePicture": "string",
+        "tag": "string"
+      },
+      "score": 5000
+    }
+ */
+
+export interface LeaderboardProps {
+    Tournament: string;
+    memberArr: IMember[];
+}
+export interface MemberCardProps {
+    Member: IMember;
+    rank: string;
+}
+export interface IProfilePicture {
+    picture: string;
+    width: number;
+    height: number;
+}

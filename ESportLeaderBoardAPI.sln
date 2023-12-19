@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ESportLeaderBoardAPI", "ESportLeaderBoardAPI\ESportLeaderBoardAPI.csproj", "{E05804C8-6FC8-4A46-AB75-02C08C920A4E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ESportLeaderBoardAPI", "API\ESportLeaderBoardAPI.csproj", "{E05804C8-6FC8-4A46-AB75-02C08C920A4E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

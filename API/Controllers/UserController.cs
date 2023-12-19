@@ -9,8 +9,8 @@ public class PlayerController : ControllerBase
 {
     
     public static List<Player> UsersOnDC = new();
-    [Authorize]
-    [HttpPut("Users")]
+    
+    [HttpPut]
     public IActionResult PutDcUsers([FromBody] Player[] users)
     {
         UsersOnDC = users.ToList();

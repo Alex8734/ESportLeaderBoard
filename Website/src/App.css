@@ -1,0 +1,25 @@
+@tailwind base;
+@layer base {
+  :root {
+    --text: #dfe2f1;
+    --background: #06070f;
+    --primary: #979ed3;
+    --secondary: #950f27;
+    --accent: #e77b1d;
+    --red: #E74040;
+    --green: #7DD68B;
+    --gold: #ffeb3b;
+    --bronce: #795548;
+    --silver: #9e9e9e;
+  }
+  .light {
+    --text: #0e1120;
+    --background: #f0f1f9;
+    --primary: #2c3368;
+    --secondary: #f06a83;
+    --accent: #e27618;
+  }
+}
+*{
+  color: var(--text);
+}
