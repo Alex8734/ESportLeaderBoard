@@ -20,11 +20,10 @@ public class LeaderBoard(Game game)
     }
 }
 
-public class Player(string name, string profilePicture, string tag)
+public class Player(string name, string profilePicture)
 {
     public string Name { get; } = name;
     public string ProfilePicture { get; } = profilePicture;
-    public string Tag { get; } = tag;
 }
 public class JsonOutput<T>
 {

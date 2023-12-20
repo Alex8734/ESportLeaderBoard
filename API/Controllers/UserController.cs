@@ -21,7 +21,13 @@ public class PlayerController : ControllerBase
     {
         return Ok(UsersOnDC);
     }
-    
+    [HttpDelete("{name}")]
+    public IActionResult RemoveUser(string name)
+    {
+        if(UsersOnDC.All(x => x.Name != name)) return NotFound();
+        UsersOnDC.Remove(UsersOnDC.First(x => x.Name == name));
+        return Ok();
+    }
     [HttpPost]
     public IActionResult PostUser([FromBody] Player user)
     {

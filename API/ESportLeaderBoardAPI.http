@@ -14,7 +14,7 @@ Content-Type: application/json
 "profilePicture": "string",
 "tag": "string"}
 ]
-
+ 
 ###
 
 GET {{ESportLeaderBoardAPI_HostAddress}}/Player/

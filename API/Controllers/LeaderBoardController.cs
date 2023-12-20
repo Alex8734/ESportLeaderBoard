@@ -31,5 +31,9 @@ public class LeaderBoardController : ControllerBase
         _boards.First(g => g.Game == game).Add(score.Value, user);
         return Ok();
     }
-    
+    [HttpGet("Types")]
+    public IActionResult GetGames()
+    {
+        return Ok(_boards.Select(b => b.Game));
+    }
 }
