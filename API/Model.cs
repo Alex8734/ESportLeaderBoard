@@ -11,9 +11,9 @@ public class LeaderBoard(Game game)
     public Dictionary<Player,int> Board { get; } = new();
     public void Add(int score, Player player)
     {
-        if(Board.ContainsKey(player))
+        if(Board.TryGetValue(player, out var value))
         {
-            Board[player] = Math.Max(score , Board[player]);
+            Board[player] = Math.Max(score , value);
             return;
         }
         Board.Add(player, score);

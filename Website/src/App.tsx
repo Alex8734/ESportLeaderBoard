@@ -1,23 +1,24 @@
 import React, {useEffect} from 'react';
 import './dist/App.css';
 import Leaderboard from './Leaderboard/Leaderboard';
-import {IMember} from "./util/prefab";
 
 function App() {
     const [leaderboardParams, setLeaderboardParams] = React.useState({
-        Tournament: 'Tournament',
+        Tournament: '',
         memberArr: []
     });
+    const [lastFetchedGame, setLastFetchedGame] = React.useState('SmashBros');
+    useEffect(() => {
+        const gameToFetch = lastFetchedGame === 'MarioKart' ? 'SmashBros' : 'MarioKart';
+        fetchLeaderboard(gameToFetch);
+    }, [lastFetchedGame]);
+
     useEffect(() => {
         const timer = setInterval(() => {
-            fetchLeaderboard().then(data => {
-                setLeaderboardParams({
-                    Tournament: data.tournament, memberArr: data.players
-                });
-            });
+            setLastFetchedGame(lastFetchedGame === 'MarioKart' ? 'SmashBros' : 'MarioKart');
         }, 30000);
         return () => clearInterval(timer);
-    }, []);
+    }, [lastFetchedGame]);
     return (
         <div className="bg-background h-screen w-screen flex items-center flex-col pt-10">
             <div className="w-1/2">
@@ -26,10 +27,14 @@ function App() {
         </div>
     );
 
-    async function fetchLeaderboard() {
-        return await fetch('https://localhost:5001/Leaderboard/MarioKart')
+    async function fetchLeaderboard(gameToFetch: string) {
+        return await fetch(`http://localhost:5001/LeaderBoard/${gameToFetch}`)
             .then(response => response.json())
             .then(data => {
+                console.log(JSON.stringify(data));
+                setLeaderboardParams({
+                    Tournament: data.tournament, memberArr: data.players
+                });
                 return data;
             });
     }
