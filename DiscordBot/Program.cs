@@ -1,34 +1,71 @@
 ﻿using System;
+using System.Reflection;
 using Discord;
 using Discord.Net;
 using Discord.Commands;
 using Discord.Interactions;
 using Discord.WebSocket;
+using Microsoft.Extensions.Configuration;
 using csharpi.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading;
+using RunMode = Discord.Interactions.RunMode;
 
-using RunMode = Discord.Commands.RunMode;
+DiscordSocketClient client;
+InteractionService commands;
+ulong testGuildId = 885176257506082866;
 
-var config = new DiscordSocketConfig
+using (var services = ConfigureServices())
 {
-    LogLevel = LogSeverity.Info,
-    MessageCacheSize = 50
-};
-var client = new DiscordSocketClient(config);
-var commands = new CommandService(new CommandServiceConfig
-{
-    LogLevel = LogSeverity.Info,
-    CaseSensitiveCommands = false,
-    DefaultRunMode = RunMode.Async,
-});
-client.Log += Log;
-commands.Log += Log;
+    client = services.GetRequiredService<DiscordSocketClient>();
+    commands = services.GetRequiredService<InteractionService>();
+    
+    client.Log += Log;
+    commands.Log += Log;
+    client.Ready += Ready;
 
-await client.LoginAsync(TokenType.Bot, Environment.GetEnvironmentVariable("DiscordToken"));
-await client.StartAsync();
-        
-await Task.Delay(-1);
+    await client.LoginAsync(TokenType.Bot, Environment.GetEnvironmentVariable("DiscordToken"));
+    await client.StartAsync();
+    
+    await services.GetRequiredService<CommandHandler>().InitializeAsync();
+    
+    await Task.Delay(Timeout.Infinite);
+}
+
+
+async Task Ready()
+{
+    if (IsDebug())
+    {
+        // this is where you put the id of the test discord guild
+        Console.WriteLine($"In debug mode, adding commands to {testGuildId}...");
+        await commands.RegisterCommandsToGuildAsync(testGuildId, true);
+        Console.WriteLine($"{client.Guilds.Count} guilds have been loaded");
+    }
+    else
+    {
+        // this method will add commands globally, but can take around an hour
+        await commands.RegisterCommandsGloballyAsync(true);
+    }
+}
+
+ServiceProvider ConfigureServices()
+{
+    return new ServiceCollection()
+        .AddSingleton(x => new DiscordSocketClient(new DiscordSocketConfig
+        {
+            LogLevel = LogSeverity.Info,
+            MessageCacheSize = 50,
+            GatewayIntents = GatewayIntents.All
+        }))
+        .AddSingleton(x => new InteractionService(x.GetRequiredService<DiscordSocketClient>(),new InteractionServiceConfig
+        {
+            DefaultRunMode = RunMode.Async,
+            LogLevel = LogSeverity.Info
+        }))
+        .AddSingleton<CommandHandler>()
+        .BuildServiceProvider();
+}
 
 static Task Log(LogMessage message)
 {
@@ -59,4 +96,13 @@ static Task Log(LogMessage message)
     // If you *need* to run on .NET 4.5 for compat/other reasons,
     // the alternative is to 'return Task.Delay(0);' instead.
     return Task.CompletedTask;
+}
+
+static bool IsDebug ( )
+{
+#if DEBUG
+    return true;
+#else
+                return false;
+#endif
 }

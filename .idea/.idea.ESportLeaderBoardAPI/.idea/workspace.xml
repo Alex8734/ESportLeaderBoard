@@ -12,15 +12,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3b1b5d86-7582-4685-a7ed-6737288a4482" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/DiscordBot/DiscordBot.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DiscordBot/Modules/LeaderBoard.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DiscordBot/Program.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DiscordBot/Services/CommandHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ESportLeaderBoardAPI/.idea/discord.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ESportLeaderBoardAPI/.idea/discord.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ESportLeaderBoardAPI/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ESportLeaderBoardAPI/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/ESportLeaderBoardAPI.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/API/ESportLeaderBoardAPI.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DiscordBot/cogs/LeaderBoard.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DiscordBot/main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ESportLeaderBoardAPI.sln" beforeDir="false" afterPath="$PROJECT_DIR$/ESportLeaderBoardAPI.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DiscordBot/DiscordBot.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/DiscordBot/DiscordBot.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DiscordBot/Modules/LeaderBoard.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DiscordBot/Modules/LeaderBoard.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DiscordBot/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DiscordBot/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DiscordBot/Services/CommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DiscordBot/Services/CommandHandler.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +30,12 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/5535e31a712343a63f5d7d796cd874e563e5ac14/src/libraries/System.Collections/src/System/Collections/Generic/SortedList.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/33167b41fdf845bea0923a05c90bf33dd5600/40/41edc6d8/DiscordSocketClient.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9eda537f15ea23cdfae523c19e87eb303a3ded88937ae7e55919387a43f70/ExecutionContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/DiscordBot/Program.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -51,13 +53,14 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/aresc/source/repos/ESportLeaderBoardAPI/ESportLeaderBoardAPI.sln",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "RoslynSettingsId",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -68,7 +71,7 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected=".NET Project.DiscordBot">
+  <component name="RunManager" selected=".NET Launch Settings Profile.ESportLeaderBoardAPI">
     <configuration name="DiscordBot" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="$PROJECT_DIR$/DiscordBot/bin/Debug/net8.0/DiscordBot.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -191,7 +194,12 @@
       <option name="presentableId" value="Default" />
       <updated>1703020016519</updated>
       <workItem from="1703020019271" duration="6493000" />
-      <workItem from="1704888112111" duration="4929000" />
+      <workItem from="1704888112111" duration="5387000" />
+      <workItem from="1704911042952" duration="5088000" />
+      <workItem from="1704921661341" duration="1224000" />
+      <workItem from="1704922907664" duration="50000" />
+      <workItem from="1704922974327" duration="47000" />
+      <workItem from="1704923036112" duration="5302000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -201,7 +209,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703025957515</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="created an Discord Bot in C#">
+      <option name="closed" value="true" />
+      <created>1704893283555</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1704893283555</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -211,6 +227,39 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="init" />
-    <option name="LAST_COMMIT_MESSAGE" value="init" />
+    <MESSAGE value="created an Discord Bot in C#" />
+    <option name="LAST_COMMIT_MESSAGE" value="created an Discord Bot in C#" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/DiscordBot/Program.cs</url>
+          <line>31</line>
+          <properties documentPath="C:\Users\aresc\source\repos\ESportLeaderBoardAPI\DiscordBot\Program.cs" initialLine="29" containingFunctionPresentation="">
+            <startOffsets>
+              <option value="906" />
+            </startOffsets>
+            <endOffsets>
+              <option value="941" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/DiscordBot/Program.cs</url>
+          <line>42</line>
+          <properties documentPath="C:\Users\aresc\source\repos\ESportLeaderBoardAPI\DiscordBot\Program.cs" initialLine="40" containingFunctionPresentation="Local function 'Ready'">
+            <startOffsets>
+              <option value="1220" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1288" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
