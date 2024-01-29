@@ -1,14 +1,19 @@
 ﻿using Discord;
 using Discord.Interactions;
 using Discord.WebSocket;
+using Discord.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using ParameterInfo = System.Reflection.ParameterInfo;
+using RequireUserPermissionAttribute = Discord.Commands.RequireUserPermissionAttribute;
+using IResult = Discord.Interactions.IResult;
 
-namespace csharpi.Services
+namespace DiscordBot.Services
 {
     public class CommandHandler
     {
@@ -27,6 +32,7 @@ namespace csharpi.Services
         {
             // add the public modules that inherit InteractionModuleBase<T> to the InteractionService
             await _commands.AddModulesAsync(Assembly.GetEntryAssembly(), _services);
+            //await InitChoicesProviders();
 
             // process the InteractionCreated payloads to execute Interactions commands
             _client.InteractionCreated += HandleInteraction;
@@ -37,7 +43,42 @@ namespace csharpi.Services
             _commands.ComponentCommandExecuted += ComponentCommandExecuted;
             
         }
+        /*
+        public Task InitChoicesProviders()
+        {
+            var assembly = Assembly.GetEntryAssembly();
+            var types = assembly.GetTypes().Where(t => t.IsSubclassOf(typeof(InteractionModuleBase<SocketInteractionContext>)));
+            foreach (var type in types)
+            {
+                var methods = type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance);
+                foreach (var method in methods)
+                {
+                    foreach (var attribute in method.GetCustomAttributes(typeof(CustomSlashCommandAttribute), false))
+                    {
+                        if(attribute is CustomSlashCommandAttribute commandAttribute)
+                        {
+                            
+                        }
+                    }
+                    
+                    var parameters = method.GetParameters();
+                    foreach (var parameter in parameters)
+                    {
+                        var attributes = parameter.GetCustomAttributes(typeof(ChoiceProviderAttribute), false);
+                        foreach (var attribute in attributes)
+                        {
+                            if (attribute is ChoiceProviderAttribute choiceProviderAttribute)
+                            {
+                                
+                            }
+                        }
+                    }
+                }
+            }
 
+            return Task.CompletedTask;
+        }*/
+        
         private Task ComponentCommandExecuted(ComponentCommandInfo arg1, Discord.IInteractionContext arg2, IResult arg3)
         {
             if (!arg3.IsSuccess)
@@ -121,6 +162,8 @@ namespace csharpi.Services
                         break;
                 }
             }
+            
+            if(arg1.Name == ""){}
 
             return Task.CompletedTask;
         }

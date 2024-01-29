@@ -14,6 +14,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.Configure<JsonOptions>(o => o.SerializerOptions.Converters
     .Add(new JsonStringEnumConverter()));
+
 builder.Services.AddCors(c =>
 {
     c.AddPolicy(Policy, options =>

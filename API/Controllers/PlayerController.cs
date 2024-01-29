@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using ESportLeaderBoardAPI.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ESportLeaderBoardAPI.Controllers;
@@ -13,6 +14,10 @@ public class PlayerController : ControllerBase
     [HttpPut]
     public IActionResult PutDcUsers([FromBody] Player[] users)
     {
+        if(LeaderBoardController.Boards.Any())
+        {
+            return BadRequest("Can't manipulate Users while Games are still running!");
+        }
         UsersOnDC = users.ToList();
         return Ok();
     }
@@ -25,7 +30,12 @@ public class PlayerController : ControllerBase
     public IActionResult RemoveUser(string name)
     {
         if(UsersOnDC.All(x => x.Name != name)) return NotFound();
-        UsersOnDC.Remove(UsersOnDC.First(x => x.Name == name));
+        var user = UsersOnDC.First(x => x.Name == name);
+        if(LeaderBoardController.Boards.Any(b => b.Board.ContainsKey(user)))
+        {
+            return BadRequest("User still in a Game!");
+        }
+        UsersOnDC.Remove(user);
         return Ok();
     }
     [HttpPost]

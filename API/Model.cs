@@ -1,10 +1,9 @@
-namespace ESportLeaderBoardAPI;
 
-public enum Game
-{
-    MarioKart,
-    SmashBros,
-}
+
+using ESportsLeaderBoard.Model;
+namespace ESportLeaderBoardAPI.Model;
+
+
 public class LeaderBoard(Game game)
 {
     public Game Game { get; } = game;
@@ -25,11 +24,3 @@ public class Player(string name, string profilePicture)
     public string Name { get; } = name;
     public string ProfilePicture { get; } = profilePicture;
 }
-public class JsonOutput<T>
-{
-    public JsonOutput(T value)
-    {
-        Value = value;
-    }
-    public T Value { get; set; }
-}  

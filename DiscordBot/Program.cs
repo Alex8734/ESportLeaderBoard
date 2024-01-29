@@ -6,7 +6,8 @@ using Discord.Commands;
 using Discord.Interactions;
 using Discord.WebSocket;
 using Microsoft.Extensions.Configuration;
-using csharpi.Services;
+using DiscordBot.Modules;
+using DiscordBot.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading;
 using RunMode = Discord.Interactions.RunMode;
@@ -37,14 +38,14 @@ async Task Ready()
 {
     if (IsDebug())
     {
-        // this is where you put the id of the test discord guild
         Console.WriteLine($"In debug mode, adding commands to {testGuildId}...");
         await commands.RegisterCommandsToGuildAsync(testGuildId, true);
+        
         Console.WriteLine($"{client.Guilds.Count} guilds have been loaded");
     }
     else
     {
-        // this method will add commands globally, but can take around an hour
+       
         await commands.RegisterCommandsGloballyAsync(true);
     }
 }
@@ -61,7 +62,8 @@ ServiceProvider ConfigureServices()
         .AddSingleton(x => new InteractionService(x.GetRequiredService<DiscordSocketClient>(),new InteractionServiceConfig
         {
             DefaultRunMode = RunMode.Async,
-            LogLevel = LogSeverity.Info
+            LogLevel = LogSeverity.Info,
+            
         }))
         .AddSingleton<CommandHandler>()
         .BuildServiceProvider();
