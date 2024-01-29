@@ -4,6 +4,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ESportLeaderBoardAPI", "API
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscordBot", "DiscordBot\DiscordBot.csproj", "{BDF877C1-6FB1-40E9-9995-DCA6AEA83902}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EsportExampleClient", "EsportExampleClient\EsportExampleClient.csproj", "{787F5B84-F211-4807-80C7-2BAF3FB1B231}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ESportsLeaderBoard.Model", "ESportsLeaderBoard.Model\ESportsLeaderBoard.Model.csproj", "{1010373D-F114-4D79-B85F-AE50B0748005}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,13 @@ Global
 		{BDF877C1-6FB1-40E9-9995-DCA6AEA83902}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDF877C1-6FB1-40E9-9995-DCA6AEA83902}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDF877C1-6FB1-40E9-9995-DCA6AEA83902}.Release|Any CPU.Build.0 = Release|Any CPU
+		{787F5B84-F211-4807-80C7-2BAF3FB1B231}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{787F5B84-F211-4807-80C7-2BAF3FB1B231}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{787F5B84-F211-4807-80C7-2BAF3FB1B231}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{787F5B84-F211-4807-80C7-2BAF3FB1B231}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1010373D-F114-4D79-B85F-AE50B0748005}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1010373D-F114-4D79-B85F-AE50B0748005}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1010373D-F114-4D79-B85F-AE50B0748005}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1010373D-F114-4D79-B85F-AE50B0748005}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

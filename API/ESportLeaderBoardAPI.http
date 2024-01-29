@@ -3,18 +3,35 @@
 PUT {{ESportLeaderBoardAPI_HostAddress}}/Player/
 Content-Type: application/json
 
-
-[{
-  "name": "Player1",
-  "profilePicture": "string",
-  "tag": "string"
-}
-,{
-"name": "Player2",
-"profilePicture": "string",
-"tag": "string"}
+[
+  {
+    "name": "Eͤͤͤrͬͬͬrͬͬͬoͦͦͦrͬͬͬ40ͦͦͦ4Xͯ",
+    "profilePicture": "https://cdn.discordapp.com/avatars/795742705350213652/1256efb7dc351a18b44e7e93f715635a.png?size=128"
+  } ,
+  {
+    "name": "SimKin",
+    "profilePicture": "https://cdn.discordapp.com/avatars/815265717037301760/47792cbbb31746092d780c14e99b987f.png?size=128"
+  }
 ]
- 
+
+###
+
+POST {{ESportLeaderBoardAPI_HostAddress}}/LeaderBoard/MarioKart/Eͤͤͤrͬͬͬrͬͬͬoͦͦͦrͬͬͬ40ͦͦͦ4Xͯ/
+Content-Type: application/json
+
+{
+"value": 90
+}
+
+###
+
+POST {{ESportLeaderBoardAPI_HostAddress}}/LeaderBoard/MarioKart/SimKin/
+Content-Type: application/json
+
+{
+ "value": 50
+}
+
 ###
 
 GET {{ESportLeaderBoardAPI_HostAddress}}/Player/
