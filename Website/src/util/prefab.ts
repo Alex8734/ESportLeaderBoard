@@ -4,7 +4,6 @@ export interface IMember {
     player: {
         name: string;
         profilePicture: string;
-        tag: string;
     };
     score: number;
 }

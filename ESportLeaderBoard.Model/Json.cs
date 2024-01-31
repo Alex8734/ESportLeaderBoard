@@ -1,4 +1,4 @@
-﻿namespace ESportsLeaderBoard.Model;
+﻿namespace ESportLeaderBoard.Model;
 
 public class JsonSingleOutput<T>
 {

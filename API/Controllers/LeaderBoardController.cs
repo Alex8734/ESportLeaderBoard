@@ -1,9 +1,8 @@
 using System.Collections.Immutable;
 using System.Runtime.InteropServices.JavaScript;
-using ESportsLeaderBoard.Model;
+using ESportLeaderBoard.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using LeaderBoard = ESportLeaderBoardAPI.Model.LeaderBoard;
 
 namespace ESportLeaderBoardAPI.Controllers;
 
@@ -11,16 +10,18 @@ namespace ESportLeaderBoardAPI.Controllers;
 [ApiController]
 public class LeaderBoardController : ControllerBase
 {
+    
     private static List<LeaderBoard> _boards = new();
-    public static ImmutableList<LeaderBoard> Boards => _boards.ToImmutableList();
+    public static List<LeaderBoard> Boards => _boards;
     [HttpGet("{game}")]
     public IActionResult GetLeaderBoard(Game game)
     {
         if (_boards.All(l => l.Game != game)) return NotFound();
         var board = _boards.First(l => l.Game == game);
-        var sorted =board.Board.OrderByDescending(p => p.Value);
-        return Ok(new { tournament = game, players = sorted.Select(kv => new {player = kv.Key, score = kv.Value}) .ToList()});
+        return Ok(LeaderBoardResponse.FromLeaderBoard(board));
     }
+    
+    
     
     [HttpPost("{game}/{userName}")]
     public IActionResult PostScore(string userName, Game game, [FromBody]JsonSingleOutput<int> score)
@@ -35,6 +36,9 @@ public class LeaderBoardController : ControllerBase
         _boards.First(g => g.Game == game).Add(score.Value, user);
         return Ok();
     }
+    
+    
+    
     [HttpGet("Types")]
     public IActionResult GetGames()
     {

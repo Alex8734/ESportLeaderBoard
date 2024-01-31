@@ -1,5 +1,8 @@
 using System.Text.Json.Serialization;
+using ESportLeaderBoard.Model;
+using ESportLeaderBoard.Model.Interfaces;
 using ESportLeaderBoardAPI;
+using ESportLeaderBoardAPI.Hubs;
 using Microsoft.AspNetCore.Http.Json;
 
 const string Policy = "AllowOrigin";
@@ -11,7 +14,12 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 });;
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddSignalR()
+    .AddJsonProtocol(options =>
+    {
+        options.PayloadSerializerOptions.Converters
+            .Add(new JsonStringEnumConverter());
+    });
 builder.Services.Configure<JsonOptions>(o => o.SerializerOptions.Converters
     .Add(new JsonStringEnumConverter()));
 
@@ -32,10 +40,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 app.MapControllers();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseCors(Policy);
+app.MapHub<LeaderBoardHub>(LeaderBoardConfig.Route);
 app.Run();
 
+ 

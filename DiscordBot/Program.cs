@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Text;
 using Discord;
 using Discord.Net;
 using Discord.Commands;
@@ -10,6 +11,7 @@ using DiscordBot.Modules;
 using DiscordBot.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading;
+using System.Text.Json;
 using RunMode = Discord.Interactions.RunMode;
 
 DiscordSocketClient client;
@@ -48,6 +50,15 @@ async Task Ready()
        
         await commands.RegisterCommandsGloballyAsync(true);
     }
+
+    var guild = client.Guilds.First(g => g.Id == 1026219411859836939);
+    Console.WriteLine("InitPlayers");
+    var members = guild.Users.Where(u => !u.IsBot).ToList();
+    var responsePlayers =
+        members.Select(u => new {name = u.DisplayName, profilePicture = u.GetDisplayAvatarUrl()}).ToList();
+    var json = JsonSerializer.Serialize(responsePlayers);
+    var output= await new HttpClient().PutAsync(@"http://localhost:5001/Player", new StringContent(json, Encoding.UTF8, "application/json"));
+
 }
 
 ServiceProvider ConfigureServices()

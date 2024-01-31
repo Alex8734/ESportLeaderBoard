@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscordBot", "DiscordBot\Di
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EsportExampleClient", "EsportExampleClient\EsportExampleClient.csproj", "{787F5B84-F211-4807-80C7-2BAF3FB1B231}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ESportsLeaderBoard.Model", "ESportsLeaderBoard.Model\ESportsLeaderBoard.Model.csproj", "{1010373D-F114-4D79-B85F-AE50B0748005}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ESportLeaderBoard.Model", "ESportLeaderBoard.Model\ESportLeaderBoard.Model.csproj", "{1010373D-F114-4D79-B85F-AE50B0748005}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

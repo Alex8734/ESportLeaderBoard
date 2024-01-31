@@ -1,6 +1,18 @@
 ﻿using Newtonsoft.Json;
-namespace ESportsLeaderBoard.Model;
+namespace ESportLeaderBoard.Model;
 
+public class Player(string name, string profilePicture)
+{
+    public string Name { get; } = name;
+    public string ProfilePicture { get; } = profilePicture;
+}
+public class NameScoreResponse
+{
+    [JsonProperty("player")]
+    public string Name { get; set; }
+    [JsonProperty("score")]
+    public int Score { get; set; }
+}
 
 public class PlayerScoreResponse
 {
@@ -17,18 +29,4 @@ public class PlayerResponse
 
     [JsonProperty("profilePicture")]
     public string ProfilePicture { get; set; }
-}
-public class LeaderBoardResponse
-{
-    [JsonConstructor]
-    public LeaderBoardResponse()
-    {
-        Players = new List<PlayerScoreResponse>();
-    }
-
-    [JsonProperty("tournament")]
-    public Game Game { get; set; }
-
-    [JsonProperty("players")]
-    public List<PlayerScoreResponse> Players { get; set; }
 }

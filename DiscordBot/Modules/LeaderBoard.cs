@@ -6,14 +6,13 @@ using System.Text.Json;
 using Discord;
 using Discord.Commands;
 using Discord.Utils;
-using ESportLeaderBoardAPI.Model;
 using Discord.Interactions;
 using Discord.Interactions.Builders;
 using DiscordBot.Services;
-using ESportsLeaderBoard.Model;
+using ESportLeaderBoard.Model;
 using Microsoft.AspNetCore.Hosting;
 using RequireUserPermissionAttribute = Discord.Commands.RequireUserPermissionAttribute;
-using Game = ESportLeaderBoardAPI.Model.LeaderBoard;
+using Game = ESportLeaderBoard.Model.Game;
 
 namespace DiscordBot.Modules;
 

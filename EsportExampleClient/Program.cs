@@ -1,18 +1,34 @@
 ﻿using System.Net.Http.Json;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Channels;
-using ESportsLeaderBoard.Model;
+using ESportLeaderBoard.Model;
+using ESportLeaderBoard.Model.Interfaces;
 using static System.Net.WebClient;
+using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.Extensions.DependencyInjection;
+using TypedSignalR.Client;
 
-Console.OutputEncoding = System.Text.Encoding.UTF8;
+Console.OutputEncoding = Encoding.UTF8;
 
 var client = new HttpClient();
 var url = "http://localhost:5001/";
 
+var connection = new HubConnectionBuilder()
+    .AddJsonProtocol(c => c.PayloadSerializerOptions.Converters.Add(new JsonStringEnumConverter()))
+    .WithUrl($"{url}{LeaderBoardConfig.Route}")
+    .Build();
+
+await connection.StartAsync();
+
+var hubProxy = connection.CreateHubProxy<ILeaderBoardHub>();
+
+using var subscription = connection.Register<ILeaderBoardClient>(new LeaderBoardClient());
+
+
 var response = await client.GetAsync($"{url}Player");
 var content = await response.Content.ReadFromJsonAsync<PlayerResponse[]>();
-Console.WriteLine("Loading Players... Done!");
-Thread.Sleep(2300);
+
 if(content is not null)
 {
     var cols = 7;
@@ -27,20 +43,43 @@ if(content is not null)
         Console.WriteLine(builder.ToString());
     }
 }
+
 var rnd = new Random();
 var games = Enum.GetValues<Game>();
-
 while (true)
 {
     var game = games[rnd.Next(games.Length)];
-    var leaderboardResponse = await client.GetAsync($"{url}Leaderboard/{game}");
-    var leaderboard = await leaderboardResponse.Content.ReadFromJsonAsync<LeaderBoardResponse>();
     foreach (var player in content)
     {
-        var score = rnd.Next(0, 5) + leaderboard.Players.FirstOrDefault(p => p.Player.Name == player.Name)?.Score ?? 0;
-        var resp = await client.PostAsync($"{url}Leaderboard/{game}/{player.Name}",
-            JsonContent.Create(new JsonSingleOutput<int>(score)));
-        Console.WriteLine($"Posting {score}, {player.Name} to {game}... {resp.StatusCode} - {await resp.Content.ReadAsStringAsync()}");
+        
+        var score = rnd.Next(0, 5) + (LeaderBoardClient.LeaderBoard?.Players.FirstOrDefault(p => p.Player.Name == player.Name)?.Score ?? 0);
+        await hubProxy.SendScore(new NameScoreResponse
+        {
+            Name = player.Name,
+            Score = score
+        }, game);
+        Console.WriteLine($"[↑] Posting {score}, {player.Name} to {game}...");
+
     }
     Thread.Sleep(1000);
+}
+
+Console.ReadKey();
+
+sealed class LeaderBoardClient : ILeaderBoardClient
+{
+    public static LeaderBoardResponse LeaderBoard { get; private set; }
+    
+    public Task ReceiveLeaderBoard(LeaderBoardResponse leaderBoard)
+    {
+        Console.WriteLine($"[↓] Got {leaderBoard.Game} LeaderBoard!");
+        LeaderBoard = leaderBoard;
+        return Task.CompletedTask;
+    }
+
+    public Task ReceiveMessage(string text)
+    {
+        Console.Error.WriteLine($"[\u2193] Failed by getting LeaderBoard!");
+        return Task.CompletedTask;
+    }
 }
