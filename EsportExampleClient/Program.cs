@@ -49,7 +49,12 @@ var games = Enum.GetValues<Game>();
 while (true)
 {
     var game = games[rnd.Next(games.Length)];
-    foreach (var player in content)
+    var startIndex = rnd.Next(0, content.Length);
+
+    // Generate a random length for the range.
+    var length = rnd.Next(1, content.Length - startIndex + 1);
+
+    foreach (var player in content.Skip(startIndex).Take(length))
     {
         
         var score = rnd.Next(0, 5) + (LeaderBoardClient.LeaderBoard?.Players.FirstOrDefault(p => p.Player.Name == player.Name)?.Score ?? 0);

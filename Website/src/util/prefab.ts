@@ -20,8 +20,8 @@ export interface IMember {
  */
 
 export interface LeaderboardProps {
-    Tournament: string;
-    memberArr: IMember[];
+    Game: string;
+    players: IMember[];
 }
 export interface MemberCardProps {
     Member: IMember;

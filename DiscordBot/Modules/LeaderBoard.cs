@@ -10,7 +10,6 @@ using Discord.Interactions;
 using Discord.Interactions.Builders;
 using DiscordBot.Services;
 using ESportLeaderBoard.Model;
-using Microsoft.AspNetCore.Hosting;
 using RequireUserPermissionAttribute = Discord.Commands.RequireUserPermissionAttribute;
 using Game = ESportLeaderBoard.Model.Game;
 

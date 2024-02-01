@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\API\ESportLeaderBoardAPI.csproj" />
+      <ProjectReference Include="..\ESportLeaderBoard.Model\ESportLeaderBoard.Model.csproj" />
     </ItemGroup>
 
 </Project>

@@ -33,7 +33,8 @@ public class LeaderBoardResponse
                 {
                     Name = kv.Key.Name,
                     ProfilePicture = kv.Key.ProfilePicture
-                }
+                },
+                Score = kv.Value
             }).ToList()
         };
     }
