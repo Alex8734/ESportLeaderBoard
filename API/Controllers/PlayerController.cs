@@ -31,7 +31,7 @@ public class PlayerController : ControllerBase
     {
         if(UsersOnDC.All(x => x.Name != name)) return NotFound();
         var user = UsersOnDC.First(x => x.Name == name);
-        if(LeaderBoardController.Boards.Any(b => b.Board.ContainsKey(user)))
+        if(LeaderBoardController.Boards.Any(b => b.Board.Any(u => u.Player.Name == user.Name)))
         {
             return BadRequest("User still in a Game!");
         }

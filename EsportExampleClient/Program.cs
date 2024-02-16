@@ -13,7 +13,7 @@ Console.OutputEncoding = Encoding.UTF8;
 
 var client = new HttpClient();
 var url = "http://localhost:5001/";
-
+Thread.Sleep(4000);
 var connection = new HubConnectionBuilder()
     .AddJsonProtocol(c => c.PayloadSerializerOptions.Converters.Add(new JsonStringEnumConverter()))
     .WithUrl($"{url}{LeaderBoardConfig.Route}")
@@ -27,7 +27,7 @@ using var subscription = connection.Register<ILeaderBoardClient>(new LeaderBoard
 
 
 var response = await client.GetAsync($"{url}Player");
-var content = await response.Content.ReadFromJsonAsync<PlayerResponse[]>();
+var content = (await response.Content.ReadFromJsonAsync<PlayerResponse[]>())!.Take(4).ToArray();
 
 if(content is not null)
 {
@@ -46,9 +46,22 @@ if(content is not null)
 
 var rnd = new Random();
 var games = Enum.GetValues<Game>();
+var count = 1;
 while (true)
 {
-    var game = games[rnd.Next(games.Length)];
+    string[] players = ["PresidentOfRoasting","Alex Resch"];
+    var name = players[count++ % players.Length];
+    await hubProxy.SendScore(new NameScoreRequest
+    {
+        Name = name,
+        Score = 1703+ 3*count+1,
+        HashCode = name.GetHashCode()
+    }, Game.MarioKart);
+    Thread.Sleep(5000);
+}
+while (false)
+{
+    var game = Game.MarioKart;//games[rnd.Next(games.Length)];
     var startIndex = rnd.Next(0, content.Length);
 
     // Generate a random length for the range.
@@ -57,13 +70,13 @@ while (true)
     foreach (var player in content.Skip(startIndex).Take(length))
     {
         
-        var score = rnd.Next(0, 5) + (LeaderBoardClient.LeaderBoard?.Players.FirstOrDefault(p => p.Player.Name == player.Name)?.Score ?? 0);
-        await hubProxy.SendScore(new NameScoreResponse
+        var score = rnd.Next(0, 20) + (LeaderBoardClient.LeaderBoard?.Players.FirstOrDefault(p => p.Player.Name == player.Name)?.Score ?? 0);
+        await hubProxy.SendScore(new NameScoreRequest
         {
             Name = player.Name,
             Score = score
         }, game);
-        Console.WriteLine($"[↑] Posting {score}, {player.Name} to {game}...");
+        Console.WriteLine($"[↑] Posting {score}, {player.Name} to {game}..."); 
 
     }
     Thread.Sleep(1000);

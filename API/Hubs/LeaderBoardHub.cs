@@ -11,7 +11,7 @@ namespace ESportLeaderBoardAPI.Hubs;
 internal sealed class LeaderBoardHub : Hub<ILeaderBoardClient>, ILeaderBoardHub
 {
 
-    public async Task SendScore(NameScoreResponse player, Game game)
+    public async Task SendScore(NameScoreRequest player, Game game)
     {
         if(LeaderBoardController.Boards.Count == 0 || LeaderBoardController.Boards.All(b => b.Game != game))
         {

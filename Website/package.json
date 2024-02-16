@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@microsoft/signalr": "^8.0.0",
+    "@microsoft/signalr": "~7.0.0",
     "@ramonak/react-progress-bar": "^5.1.1",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -12,6 +12,7 @@
     "@types/node": "^16.18.68",
     "@types/react": "^18.2.45",
     "@types/react-dom": "^18.2.17",
+    "framer-motion": "^11.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "^5.0.1",
@@ -25,7 +26,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "tailwind1": "tailwindcss -i .\\src\\App.css -o .\\src\\dist\\App.css --watch ",
+    "tailwind2": "tailwindcss -i .\\src\\Leaderboard\\Leaderboard.css -o .\\src\\dist\\Leaderboard.css --watch",
+    "tailwind3": "tailwindcss -i .\\src\\MemberCard\\MemberCard.css -o .\\src\\dist\\MemberCard.css --watch"
   },
   "eslintConfig": {
     "extends": [

@@ -7,35 +7,67 @@ namespace ESportLeaderBoard.Model;
 public class LeaderBoard(Game game)
 {
     public Game Game { get; } = game;
-    public Dictionary<Player,int> Board { get; } = new();
+    public List<PlayerScoreResponse> Board { get; private set; } = new();
     public void Add(int score, Player player)
     {
-        if(Board.TryGetValue(player, out var value))
+        var before = new PlayerScoreResponse[Board.Count];
+        Board.CopyTo(before);
+        var boardPlayer = Board.FirstOrDefault(p => p.Player.Name == player.Name);
+        if(boardPlayer is not null)
         {
-            Board[player] = Math.Max(score , value);
-            return;
+            boardPlayer.Score = Math.Max(score , boardPlayer.Score);
+        }else
+        {
+            Board.Add(new PlayerScoreResponse
+            {
+                Player = PlayerResponse.FromPlayer(player),
+                Score = score,
+                RankState = RankState.Neutral
+            });
         }
-        Board.Add(player, score);
+        Board = Board.Order(new PlayerComparer()).ToList();
+        for (int i = 0; i < Board.Count; i++)
+        {
+            var beforeIndex = before.ToList().FindIndex(p => p.Player.Name == Board[i].Player.Name);
+            if(beforeIndex == -1) beforeIndex = 0;
+            var newRankState = i < beforeIndex
+                ? RankState.Up
+                : i > beforeIndex
+                    ? RankState.Down
+                    : RankState.Neutral;
+            if(Board[i].RankState != RankState.Neutral 
+               && newRankState == RankState.Neutral 
+               && Board[i].NeutralCooldown >= 0)
+            {
+                Board[i].NeutralCooldown--;
+                continue;
+            }
+            Board[i].RankState = newRankState;
+            Board[i].NeutralCooldown = PlayerScoreResponse.DefaultCooldown;
+        }
     }
 }
+
+public class PlayerComparer : IComparer<PlayerScoreResponse>
+{
+    public int Compare(PlayerScoreResponse x, PlayerScoreResponse y)
+    {
+        return x == y 
+            ? 0 
+            : x.Score > y.Score 
+                ? -1 
+                : 1;
+    }
+}
+
 public class LeaderBoardResponse
 {
     public static LeaderBoardResponse FromLeaderBoard(LeaderBoard l)
     {
-        
-        var sorted =l.Board.OrderByDescending(p => p.Value);
         return new LeaderBoardResponse()
         {
             Game = l.Game,
-            Players = sorted.Select(kv => new PlayerScoreResponse()
-            {
-                Player = new PlayerResponse()
-                {
-                    Name = kv.Key.Name,
-                    ProfilePicture = kv.Key.ProfilePicture
-                },
-                Score = kv.Value
-            }).ToList()
+            Players = l.Board.ToList()
         };
     }
     [JsonConstructor]

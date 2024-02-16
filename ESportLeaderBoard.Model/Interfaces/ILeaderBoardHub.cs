@@ -9,5 +9,5 @@ public static class LeaderBoardConfig
 
 public interface ILeaderBoardHub
 {
-    public Task SendScore(NameScoreResponse player, Game game);
+    public Task SendScore(NameScoreRequest player, Game game);
 }
