@@ -22,7 +22,7 @@ export interface IMember {
  */
 
 export interface LeaderboardProps {
-    Game: string;
+    game: string;
     players: IMember[];
     prevPlayers: number[];
 }

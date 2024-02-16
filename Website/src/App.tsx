@@ -10,7 +10,7 @@ function App() {
     const signalR = createSignalRContext()
     const [games,setGames] = React.useState<string[]>([]);
     const [leaderboardParams, setLeaderboardParams] = React.useState<LeaderboardProps>({
-        Game: 'No Games...',
+        game: 'No Games...',
         players: [],
         prevPlayers: []
     });
@@ -29,11 +29,11 @@ function App() {
         if (isSame) {
             return ;
         }
-        setLeaderboardParams((prev) => {
+        setLeaderboardParams((prev) : LeaderboardProps => {
             return {
                 ...updatedPlayers,
                 prevPlayers: prev.players.map((player) => player.player.hashCode),
-                Game: updatedPlayers.Game
+                game: updatedPlayers.game
             }
         });
     }
@@ -45,14 +45,14 @@ function App() {
         
         connection.on("ReceiveLeaderBoard", (leaderboard : LeaderboardProps) => {
             console.log("Received Leaderboard");
-            console.log(leaderboard.Game);
-            if (leaderboard.Game === lastFetchedGame) {
+            console.log(leaderboard.game);
+            if (leaderboard.game === lastFetchedGame) {
                 console.log("updating leaderboard")
                 updateLeaderboard(leaderboard)
             }
-            if (!games.includes(leaderboard.Game)) {
+            if (!games.includes(leaderboard.game)) {
                 setGames((prev) => {
-                    return [...prev, leaderboard.Game];
+                    return [...prev, leaderboard.game];
                 });
             }
         });
@@ -63,12 +63,12 @@ function App() {
     
     /*signalR.useSignalREffect("ReceiveLeaderBoard", (leaderboard : LeaderboardProps) => {
             console.log("Received Leaderboard");
-            console.log(leaderboard.Game);
-            if (leaderboard.Game === lastFetchedGame) {
+            console.log(leaderboard.game);
+            if (leaderboard.game === lastFetchedGame) {
                 updateLeaderboard(leaderboard)
             }
-            if (!games.includes(leaderboard.Game)) {
-                games.push(leaderboard.Game);
+            if (!games.includes(leaderboard.game)) {
+                games.push(leaderboard.game);
             }
        
     },[]);

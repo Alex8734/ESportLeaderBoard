@@ -12,7 +12,7 @@ const Leaderboard: React.FC<LeaderboardProps> = (leaderBoard:LeaderboardProps) =
     function getPrevIndex(idx:number){
         return leaderBoard?.prevPlayers?.indexOf(leaderBoard.players[idx]?.player.hashCode ?? -1) ?? idx+1;
     }
-    console.log(leaderBoard.Game)
+    console.log(leaderBoard.game)
     const [prevIdx1, setPrevIdx1] = useState(getPrevIndex(0))
     const [prevIdx2, setPrevIdx2] = useState(getPrevIndex(1))
     const [prevIdx3, setPrevIdx3] = useState(getPrevIndex(2))
@@ -25,7 +25,7 @@ const Leaderboard: React.FC<LeaderboardProps> = (leaderBoard:LeaderboardProps) =
     console.log(prevIdx1, prevIdx2, prevIdx3)
     return (
         <>
-            <h2 className="text-6xl text-center mb-10 decoration-4 text-white">{leaderBoard.Game}</h2>
+            <h2 className="text-6xl text-center mb-10 decoration-4 text-white">{leaderBoard.game}</h2>
             <div className="grid grid-cols-3 grid-rows-1 mb-28">
                 <MemberCard Member={leaderBoard.players[0]} rank={1} prevRank={prevIdx1 !== -1 ? prevIdx1 +1 : 1}/>
                 <MemberCard Member={leaderBoard.players[1]} rank={2} prevRank={prevIdx2 !== -1 ? prevIdx2+1 : 2}/>

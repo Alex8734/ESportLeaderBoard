@@ -57,7 +57,7 @@ const MemberCard:React.FC<MemberCardProps> = ({Member  ,rank,prevRank})  => {
     
     console.log(Member?.player.name, rank, prevRank, state)
     return (
-        <>
+        <AnimatePresence>
             <div 
                 className="flex justify-center items-center">
                 <h2 className="text-3xl mr-3">{rank}
@@ -71,13 +71,24 @@ const MemberCard:React.FC<MemberCardProps> = ({Member  ,rank,prevRank})  => {
                                 : 'ᵗʰ'
                 }
                 </h2>
-                <div
+                <motion.div
                     key={Member?.player.hashCode ?? Math.random() * Math.random() * 10}
                     style={{zIndex: 500 - rank,
-                        position: 'absolute',
-                        left: (getIndices(rank).x+1) * xMultiplier,
-                        top: (getIndices(rank).y+1) * yMultiplier ,
+                        position: 'absolute'}}
+                    
+                    initial={{
+                        left: (getIndices(prevRank).x + 1) * xMultiplier,
+                        top: (getIndices(prevRank).y + 1) * yMultiplier,
+                        backgroundColor: classes[getClasses(prevRank)].backgroundColor
+                    }}
+                    animate={{
+                        left: (getIndices(rank).x + 1) * xMultiplier,
+                        top: (getIndices(rank).y + 1) * yMultiplier,
                         backgroundColor: classes[getClasses(rank)].backgroundColor
+                    }}
+                    transition={{
+                        duration: 1,
+                        ease: "easeInOut"
                     }}
 
                     className={`font-semibold justify-center rounded px-4 py-1`}>
@@ -92,9 +103,9 @@ const MemberCard:React.FC<MemberCardProps> = ({Member  ,rank,prevRank})  => {
                             : 'text-gold'}`}>
                         {state}
                     </h4>
-                </div>
+                </motion.div>
             </div>
-        </>
+        </AnimatePresence>
     );
 }
 
