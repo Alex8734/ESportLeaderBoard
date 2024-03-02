@@ -47,7 +47,7 @@ if(content is not null)
 var rnd = new Random();
 var games = Enum.GetValues<Game>();
 var count = 1;
-while (true)
+while (false)
 {
     string[] players = ["PresidentOfRoasting","Alex Resch"];
     var name = players[count++ % players.Length];
@@ -59,9 +59,9 @@ while (true)
     }, Game.MarioKart);
     Thread.Sleep(5000);
 }
-while (false)
+while (true)
 {
-    var game = Game.MarioKart;//games[rnd.Next(games.Length)];
+    var game = games[rnd.Next(games.Length)];
     var startIndex = rnd.Next(0, content.Length);
 
     // Generate a random length for the range.
@@ -77,7 +77,7 @@ while (false)
             Score = score
         }, game);
         Console.WriteLine($"[↑] Posting {score}, {player.Name} to {game}..."); 
-
+    
     }
     Thread.Sleep(1000);
 }

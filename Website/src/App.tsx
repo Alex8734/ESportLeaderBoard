@@ -20,7 +20,6 @@ function App() {
         initGames().then((data) => {
             setGames(data);
         });
-        console.log(games)
     }, []);
     const updateLeaderboard = (updatedPlayers: LeaderboardProps) => {
         const isSame = JSON.stringify(leaderboardParams.players) === JSON.stringify(updatedPlayers.players);
@@ -44,13 +43,14 @@ function App() {
             .build();
         
         connection.on("ReceiveLeaderBoard", (leaderboard : LeaderboardProps) => {
-            console.log("Received Leaderboard");
-            console.log(leaderboard.game);
+            console.log(`Received Leaderboard ${leaderboard.game}`);
+            console.log(`games : ${games}`)
             if (leaderboard.game === lastFetchedGame) {
                 console.log("updating leaderboard")
                 updateLeaderboard(leaderboard)
             }
-            if (!games.includes(leaderboard.game)) {
+            if (games.indexOf(leaderboard.game) === -1) {
+                console.log(`adding game ${leaderboard.game}`)
                 setGames((prev) => {
                     return [...prev, leaderboard.game];
                 });
@@ -122,7 +122,7 @@ function App() {
         return await fetch(`http://localhost:5001/LeaderBoard/${gameToFetch}`)
             .then(response => response.json())
             .then((data:LeaderboardProps )=> {
-                console.log("fetching leaderboard")
+                console.log(`fetched leaderboard: ${gameToFetch} ---> `);
                 console.log(data);
                 updateLeaderboard(data);
                 
